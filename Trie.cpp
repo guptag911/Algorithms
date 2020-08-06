@@ -55,6 +55,40 @@ bool search(string p, Trie* r)
 	return temp->eoc;
 }
 
+bool searcher(string p, int i, Trie* r, int n)
+{
+	if(i==n)
+	{
+		return r->eoc;
+	}
+	else
+	{
+		if(p[i]=='.')
+		{
+			for(int l=0;l<26;l++)
+			{
+				if(r->arr[l]!=NULL && searcher(p,i+1,r->arr[l],n))
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+		else
+		{
+			int q = p[i]-'a';
+			if(r->arr[q]==NULL)
+			{
+				return false;
+			}
+			else
+			{
+				return searcher(p,i+1,r->arr[q],n);
+			}
+		}
+	}
+}
+
 int main()
 {
 	boost;	
